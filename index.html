@@ -19,8 +19,8 @@
             <p id="Marke_ER"></p>
             <input type="text" id="D_Production" placeholder="jj/mm/aaaa" >
             <p id="Prduction_ER"></p>
-            <select id="select" >
-                <option disabled="disabled" >--Please select the Product type--</option>
+            <select name="--Please select the Product type--" id="select" >
+                <option value="" hidden>--Please select the Product type--</option>
                 <option  value="hygiène et toilette" class="type">hygiène et toilette</option>
                 <option  value="soins esthétiques" class="type">soins esthétiques</option>
                 <option  value="produits solaires" class="type">produits solaires</option>
@@ -39,7 +39,7 @@
             <input type="radio" value=" Non" name="promotion" id="Promo_N">
             <label>Non</label>
             </div>
-            <p id="Promotion_ER"></p>
+            <p id="promotion_ER"></p>
         </div>
             <button id="Add_btn">Add Product</button>
         </form> 
@@ -65,7 +65,7 @@
    </section>
     <section id="modal">
         <div id="id01" class="modal">
-            <span onclick="HideModal()" class="close" title="Close Modal">×</span>
+            <span onclick="HideModal()" title="Close Modal">×</span>
             <form class="modal-content" action="/action_page.php">
               <div class="container"></div>
                 <p style="text-align: center;">Are you sure you want to delete your account?</p>
