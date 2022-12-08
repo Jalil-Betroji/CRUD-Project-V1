@@ -4,13 +4,11 @@ let Name = document.getElementById("name");
 let Marke = document.getElementById("marke");
 let Production = document.getElementById("D_Production");
 let Type = document.querySelector("#select");
-const TypeR =document.querySelector(".type");
 let Prix = document.getElementById("prix");
 let promotions = document.getElementsByName("promotion");
-let PopUp = document.getElementById("popup");
 let Create_P = document.getElementById("Add_btn");
-let Update = document.getElementById("Update_btn");
-let  M_Regex = /[a-z]/gi;
+let Name_Regex = /[a-zA-Z-\s\w\s]+$/gi;
+let M_Regex = /[a-zA-Z-\s]+$/gi;
 let P_Regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/gi;
 let mood = "create" ;
 let temp;
@@ -24,42 +22,42 @@ Create_P.addEventListener("click" , (e)=>{
     let arr = [];
   // ======================================= clean data =======================================
 
-     if (Name.value.length === 0 || Marke.value.length === 0 || Production.value.length === 0 || Type.length === 0 || Prix.value.length === 0){
+     if (Name.value.length === 0 ){
       document.getElementById("Name_ER").innerHTML = "required field";
-      document.getElementById("Marke_ER").innerHTML = "required field";
-      document.getElementById("Prduction_ER").innerHTML = "required field";
-      document.getElementById("Type_ER").innerHTML = "required field";
-      document.getElementById("Prix_ER").innerHTML = "required field";
-     }else{
-      document.getElementById("Name_ER").innerHTML = "";
-      document.getElementById("Marke_ER").innerHTML = "";
-      document.getElementById("Prduction_ER").innerHTML = "";
-      document.getElementById("Type_ER").innerHTML = "";
-      document.getElementById("Prix_ER").innerHTML = "";
-         arr.push(true);
-     }
-      if (M_Regex.test(Marke.value) === false) {
-    document.getElementById("Marke_ER").innerHTML = "seules les lettres sont autorisees";
-  } else {
+  } else if(Name_Regex.test(Name.value) === false){
+    document.getElementById("Name_ER").innerHTML = "You can't use special characters";
+  }
+  else {
+    document.getElementById("Name_ER").innerHTML =""
     arr.push(true);
   } 
+
+  if (Marke.value.length === 0 ){
+    document.getElementById("Marke_ER").innerHTML = "required field";
+} else if(M_Regex.test(Name.value) === false){
+  document.getElementById("Marke_ER").innerHTML = "Only Letters Allowed";
+}
+else {
+  document.getElementById("Marke_ER").innerHTML =""
+  arr.push(true);
+} 
   
  
   // ================ promotion_Validation ====================
 
-  let pro = false;
-  for (let i = 0; i < promotions.length; i++) {
-    if (promotions[i].checked === true) {
-      pro = true
-      break;
-    }
-  }
-  if (pro === false) {
-    document.getElementById("promotion_ER").innerHTML = "required field";
-  } else {
-    document.getElementById("promotion_ER").innerHTML = "";
-    arr.push(true);
-  }
+  // let pro = false;
+  // for (let i = 0; i < promotions.length; i++) {
+  //   if (promotions[i].checked === true) {
+  //     pro = true
+  //     break;
+  //   }
+  // }
+  // if (pro === false) {
+  //   document.getElementById("promotion_ER").innerHTML = "required field";
+  // } else {
+  //   document.getElementById("promotion_ER").innerHTML = "";
+  //   arr.push(true);
+  // }
   
   // ================ Create_product ====================
 
@@ -67,7 +65,7 @@ if(localStorage.product != null){
   Add_Pro = JSON.parse(localStorage.product);
 }
 
-if (arr.length === 3 && mood === "create") {
+if (arr.length === 2 && mood === "create") {
      let New_Pro =  {
             Name:Name.value,
             Marke:Marke.value,
@@ -86,7 +84,7 @@ if (arr.length === 3 && mood === "create") {
     document.getElementById("Promo_Y").checked = false;
     document.getElementById("Promo_N").checked = false;
     showdata();
-  }else if(arr.length === 3 && mood === "update"){
+  }else if(arr.length === 2 && mood === "update"){
     let New_Pro =  {
       Name:Name.value,
       Marke:Marke.value,
