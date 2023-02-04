@@ -35,13 +35,11 @@ h2 {
     margin: 1rem 1rem;
     color: white;
 }
-#Success_Result {
-    color: #20a620;
-    margin: 1rem 1rem;
-}
-#Failed_Result {
-    color: red;
-    margin: 1rem 1rem;
+#Result {
+    margin: .5rem 1rem;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    font-weight: 900;
 }
 p {
     color: red;
@@ -119,7 +117,7 @@ tbody button {
 /* ================== Modal ================== */
 
 #modal {
-    grid-column: 3/12;
+   
     display: none;
     margin: 5rem 0;
     background-color: rgba(33, 29, 29, 0.491);

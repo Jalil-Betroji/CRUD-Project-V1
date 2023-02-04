@@ -1,5 +1,4 @@
-let S_Result = document.getElementsByClassName("Success_Result");
-let F_Result = document.getElementsByClassName("Failed_Result");
+let Result = document.getElementById("Result");
 let Name = document.getElementById("name");
 let Marke = document.getElementById("marke");
 let Production = document.getElementById("D_Production");
@@ -9,7 +8,7 @@ let promotions = document.getElementsByName("promotion");
 let Create_P = document.getElementById("Add_btn");
 let Name_Regex = /[a-zA-Z-\s\w\s]+$/gi;
 let M_Regex = /[a-zA-Z-\s]+$/gi;
-let P_Regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/gi;
+let P_Regex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/;
 let mood = "create";
 let temp;
 
@@ -21,7 +20,7 @@ Create_P.addEventListener("click", (e) => {
     e.preventDefault();
     let arr = [];
 
-    // ======================================= clean data ====================================
+    // ======================================= Name_Validation ====================================
 
     if (Name.value.length === 0) {
         document.getElementById("Name_ER").innerHTML = "required field";
@@ -105,6 +104,9 @@ Create_P.addEventListener("click", (e) => {
         Prix.value = "";
         document.getElementById("Promo_Y").checked = false;
         document.getElementById("Promo_N").checked = false;
+        Result.innerHTML ="Your Product added successfuly";
+        Result.style.color="green";
+        Result.style.backgroundColor="white";
         showdata();
     } else if (arr.length === 6 && mood === "update") { // this part is for updating a existing product
         let New_Pro = {
@@ -113,7 +115,7 @@ Create_P.addEventListener("click", (e) => {
             Production: Production.value,
             Type: document.getElementById("select").selectedOptions[0].value,
             Prix: Prix.value,
-            promotion: document.querySelector('input[name="promotion"]:checked') ?. value
+            promotion: document.querySelector('input[name="promotion"]:checked')?.value
         }
         Add_Pro[temp] = New_Pro;
         localStorage.setItem("product", JSON.stringify(Add_Pro));
@@ -126,7 +128,14 @@ Create_P.addEventListener("click", (e) => {
         Prix.value = "";
         document.getElementById("Promo_Y").checked = false;
         document.getElementById("Promo_N").checked = false;
+        Result.innerHTML ="Your Product Updated successfuly";
+        Result.style.color="green";
+        Result.style.backgroundColor="white";
         showdata();
+    }else {
+        Result.innerHTML ="an error occurred";
+        Result.style.color="red";
+        Result.style.backgroundColor="white";
     }
 
 })
